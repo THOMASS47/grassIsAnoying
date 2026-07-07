@@ -8,10 +8,16 @@ public class Config {
 
     public static boolean isModEnabled = true;
     public static boolean hideBlockOutline = true;
+    public static Configuration configuration;
 
-    public static void synchronizeConfiguration(File configFile) {
-        Configuration configuration = new Configuration(configFile);
+    public static void init(File configFile) {
+        if (configuration == null) {
+            configuration = new Configuration(configFile);
+            syncConfig();
+        }
+    }
 
+    public static void syncConfig() {
         isModEnabled = configuration.getBoolean(
             "isModEnabled",
             Configuration.CATEGORY_GENERAL,
@@ -26,6 +32,13 @@ public class Config {
 
         if (configuration.hasChanged()) {
             configuration.save();
+        }
+    }
+
+    @cpw.mods.fml.common.eventhandler.SubscribeEvent
+    public void onConfigChanged(cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.modID.equals(GrassIsAnnoying.MODID)) {
+            syncConfig();
         }
     }
 }

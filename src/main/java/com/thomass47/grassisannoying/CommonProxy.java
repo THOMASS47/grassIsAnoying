@@ -11,7 +11,10 @@ public class CommonProxy {
     // etc, and register them with the
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
-        Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
+        Config.init(event.getSuggestedConfigurationFile());
+        cpw.mods.fml.common.FMLCommonHandler.instance()
+            .bus()
+            .register(new Config());
 
         GrassIsAnnoying.LOG.info(
             "Grass annoyance reduced by " + (int) ((Config.isModEnabled ? Math.random() / 2.0 + 0.5 : 0) * 100) + "%");

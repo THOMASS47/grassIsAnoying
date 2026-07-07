@@ -14,7 +14,8 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
     modid = GrassIsAnnoying.MODID,
     version = Tags.VERSION,
     name = "Grass Is Annoying",
-    acceptedMinecraftVersions = "[1.7.10]")
+    acceptedMinecraftVersions = "[1.7.10]",
+    guiFactory = "com.thomass47.grassisannoying.ConfigGuiFactory")
 public class GrassIsAnnoying {
 
     public static final String MODID = "grassisannoying";
